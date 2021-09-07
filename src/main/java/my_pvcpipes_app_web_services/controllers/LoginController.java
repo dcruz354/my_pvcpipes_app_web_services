@@ -4,6 +4,7 @@
 package my_pvcpipes_app_web_services.controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +33,14 @@ public class LoginController extends HttpServlet{
 		//String username = req.getParameter("usersLoginName");
 		//String password = req.getParameter("usersLoginPassword");
 		
-		getServletContext().getRequestDispatcher("/jsp/LoginGood.jsp").forward(req,res);
+		res.setContentType("text/html");
+		PrintWriter pw = res.getWriter();
+		
+		pw.println("<html><body>");  
+		pw.println("Welcome to servlet");  
+		pw.println("</body></html>");  
+		  
+		pw.close();//closing the stream  
 		
 	}// end of doPOST
 
