@@ -27,14 +27,14 @@ public class WelcomeController extends HttpServlet{
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 			
 			String number = req.getParameter("welcomeRequest");
-	
-	        System.out.println(number);
 			
 			//Evaluate status and forward the process results
 			if(number.equalsIgnoreCase("1")){
 			
 				getServletContext().getRequestDispatcher("/login.html").forward(req, res);
 			
+			} else {
+				getServletContext().getRequestDispatcher("/customerRegistration.html").forward(req, res);
 			}
 					
 		}// end of doPOST

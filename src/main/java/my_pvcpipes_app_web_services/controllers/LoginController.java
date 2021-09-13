@@ -26,17 +26,20 @@ public class LoginController extends HttpServlet{
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		System.out.println("Inside LoginController :: doPost");
 		String username = req.getParameter("usersLoginName");
-		//String password = req.getParameter("usersLoginPassword");
+		String password = req.getParameter("usersLoginPassword");
 		
-		res.setContentType("text/html");
-		PrintWriter pw = res.getWriter();
 		
-		pw.println("<html><body>");  
-		pw.println("Welcome to servlet - " + username);  
-		pw.println("</body></html>");  
-		  
-		pw.close();//closing the stream  
+		if(authenticate(username, password)) {
+			getServletContext().getRequestDispatcher("/LoginGood.jsp").forward(req, res);
+		} else {
+			getServletContext().getRequestDispatcher("/LoginError.jsp").forward(req, res);
+		}
 		
 	}// end of doPOST
+	
+	public boolean authenticate( String username, String password) {
+		boolean isSuccess = true;
+		return isSuccess;
+	}
 
 }
