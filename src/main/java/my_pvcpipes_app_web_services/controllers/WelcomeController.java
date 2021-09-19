@@ -5,6 +5,7 @@ package my_pvcpipes_app_web_services.controllers;
 
 import java.io.IOException;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,7 +32,9 @@ public class WelcomeController extends HttpServlet{
 			//Evaluate status and forward the process results
 			if(number.equalsIgnoreCase("1")){
 			
-				getServletContext().getRequestDispatcher("/login.html").forward(req, res);
+				String destPage = "jsp/login.jsp";
+				RequestDispatcher dispatcher = req.getRequestDispatcher(destPage);
+				dispatcher.forward(req, res);
 			
 			} else {
 				getServletContext().getRequestDispatcher("/customerRegistration.html").forward(req, res);

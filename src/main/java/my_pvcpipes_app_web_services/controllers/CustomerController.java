@@ -26,9 +26,9 @@ public class CustomerController extends HttpServlet{
 		System.out.println("Inside CustomerController :: doPost");
 		
 		String customersFirstName = req.getParameter("customersFirstName");
-		String customersLastName = req.getParameter("customersLastName");
-		String customersEmailAddress = req.getParameter("customersEmailAddress");
-		String customersPassword = req.getParameter("customersPassword");
+//		String customersLastName = req.getParameter("customersLastName");
+//		String customersEmailAddress = req.getParameter("customersEmailAddress");
+//		String customersPassword = req.getParameter("customersPassword");
 		
 		res.setContentType("text/html");
 		PrintWriter pw = res.getWriter();

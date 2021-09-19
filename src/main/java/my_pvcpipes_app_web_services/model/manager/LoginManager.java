@@ -3,6 +3,15 @@
  */
 package my_pvcpipes_app_web_services.model.manager;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import my_pvcpipes_app_web_services.model.domain.Customer;
+
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 /**
  * @author Dcruz
  *
@@ -42,6 +51,54 @@ public class LoginManager {
 			// Send status back to Customer Registration Controller
 			return status;
 		
+	}
+	
+	public Customer checkLogin(String email, String password) throws SQLException, ClassNotFoundException {
+		String sql = "SELECT * FROM customers WHERE email_address = ? and password = ?";
+		Customer cust = null;
+//		try(Connection connection = getConnection();
+//				PreparedStatement ps = connection.prepareStatement(sql);
+//				) {
+//			ps.setString(1,  email);
+//			ps.setString(2, password);
+//			
+//			ResultSet rs = ps.executeQuery();
+//					
+//			if(rs.next()) {
+//				int id = rs.getInt("id");
+//				String firstName = rs.getString("first_name");
+//				String lastName = rs.getString("last_name");
+//				
+//				cust = new Customer(id, firstName, lastName, email, password);
+//				rs.close();
+//			} else {
+//				rs.close();
+//				
+//			}
+//			
+//		}
+		
+		cust = new Customer(1, "David", "test", "test@test.com", "password");
+		return cust;
+		
+	}
+	
+	// method that connects to a MySQL database
+	private Connection getConnection() {
+		System.out.println("connect to a MySQL database");
+		Connection connection = null;
+		try {
+			String dbURL = "jdbc:mysql://localhost:3306/my_pvcpipes_appdb";
+			String username = "root";
+			String password = "admin";
+			connection = DriverManager.getConnection(dbURL, username, password);
+			System.out.println("Connected");
+		} catch(SQLException ex)
+		{
+			System.out.println(ex);
+		}
+		
+		return connection;
 	}
 
 }

@@ -4,12 +4,16 @@
 package my_pvcpipes_app_web_services.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import my_pvcpipes_app_web_services.model.domain.Customer;
+import my_pvcpipes_app_web_services.model.manager.LoginManager;
 
 /**
  * @author Dcruz
@@ -28,13 +32,27 @@ public class LoginController extends HttpServlet{
 		String username = req.getParameter("usersLoginName");
 		String password = req.getParameter("usersLoginPassword");
 		
+		LoginManager loginManager = new LoginManager();
 		
-		if(authenticate(username, password)) {
-			getServletContext().getRequestDispatcher("/LoginGood.jsp").forward(req, res);
-		} else {
-			getServletContext().getRequestDispatcher("/LoginError.jsp").forward(req, res);
+		try {
+			Customer customer = loginManager.checkLogin(username, password);
+			String destPage = "jsp/login.jsp";
+			
+			if(customer != null) {
+				HttpSession session = req.getSession();
+				session.setAttribute("customer", customer);
+				destPage = "jsp/LoginGood.jsp";
+			} else {
+				String message = "Invalid email/password";
+				req.setAttribute("message", message);
+			}
+			
+			RequestDispatcher dispatcher = req.getRequestDispatcher(destPage);
+			dispatcher.forward(req, res);
+		} catch (SQLException | ClassNotFoundException ex) {
+			System.out.println(ex);
 		}
-		
+				
 	}// end of doPOST
 	
 	public boolean authenticate( String username, String password) {

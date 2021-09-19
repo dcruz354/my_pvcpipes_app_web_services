@@ -7,6 +7,8 @@
 <title>Login</title>
 </head>
 <body>
-	<h1>Login Accepted!</h1>			
+	<h1>Login Accepted! </h1>
+	<br>
+	<b>Welcome, ${customer.firstName}</b>				
 </body>
 </html>

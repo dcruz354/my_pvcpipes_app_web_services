@@ -82,6 +82,21 @@ public class Customer implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	/**
+	 * @param id
+	 * @param firstName
+	 * @param lastName
+	 * @param emailAddress
+	 * @param password
+	 */
+	public Customer(int id, String firstName, String lastName, String emailAddress, String password) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.emailAddress = emailAddress;
+		this.password = password;
+	}
 	
 	
 
