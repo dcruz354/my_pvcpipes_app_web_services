@@ -172,13 +172,16 @@ public class MyPvcPipesAppManager extends ManagerSuperType{
 		ICustomerService iCustomerService;
 		
 		try {
+			logger.info("MyPvcPipesAppManager::listCustomers failed :: 175");
 			iCustomerService = (ICustomerService) serviceFactory.getService(commandString);
+			logger.info("MyPvcPipesAppManager::listCustomers failed :: 177");
 			isSuccess = iCustomerService.getAllCustomers();
+			logger.info("MyPvcPipesAppManager::listCustomers failed :: 179");
 		}  catch (ServiceLoadException e1) {
-			logger.info("MyPvcPipesAppManager::listCustomers failed");
+			logger.info("MyPvcPipesAppManager::listCustomers failed :: ServiceLoadException");
 		} catch (CustomerException e) {
 			// TODO Auto-generated catch block
-			logger.info("MyPvcPipesAppManager::listCustomers failed");
+			logger.info("MyPvcPipesAppManager::listCustomers failed :: CustomerException");
 			e.printStackTrace();
 		}
 		

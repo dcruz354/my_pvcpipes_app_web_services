@@ -7,13 +7,14 @@ import java.util.List;
 
 import my_pvcpipes_app_web_services.model.domain.Composite;
 import my_pvcpipes_app_web_services.model.domain.Customer;
+import my_pvcpipes_app_web_services.model.services.IService;
 import my_pvcpipes_app_web_services.model.services.exception.CustomerException;
 
 /**
  * @author Dcruz
  *
  */
-public interface ICustomerService {
+public interface ICustomerService extends IService {
 	public final String NAME = "ICustomerService";
 	
 	public boolean getAllCustomers() throws CustomerException;
