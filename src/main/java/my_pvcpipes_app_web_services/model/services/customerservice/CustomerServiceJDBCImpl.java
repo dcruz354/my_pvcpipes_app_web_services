@@ -34,35 +34,37 @@ public class CustomerServiceJDBCImpl implements ICustomerService {
 				+ "FROM customers";
 		List<Customer> customers = new ArrayList<>();
 		
-		try(Connection connection = getConnection();
-				PreparedStatement ps = connection.prepareStatement(sql);
-				ResultSet rs = ps.executeQuery(sql)) {
-			while (rs.next()) {
-				int id = rs.getInt("id");
-				String firstName = rs.getString("first_name");
-				String lastName = rs.getString("last_name");
-				String email = rs.getString("email");
-				String password = rs.getString("password");
-				
-				Customer cust = new Customer(id, firstName, lastName, email, password);
-				customers.add(cust);
-			}
-			
-			if(customers != null)
-			{
-				for(Customer c: customers) {
-					logger.info(c.toString());
-				}
-			} else
-				logger.info("No customers to print");
-			
-			return true;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			logger.info(e);
-			e.printStackTrace();
-			return false;
-		}
+//		try(Connection connection = getConnection();
+//				PreparedStatement ps = connection.prepareStatement(sql);
+//				ResultSet rs = ps.executeQuery(sql)) {
+//			while (rs.next()) {
+//				int id = rs.getInt("id");
+//				String firstName = rs.getString("first_name");
+//				String lastName = rs.getString("last_name");
+//				String email = rs.getString("email");
+//				String password = rs.getString("password");
+//				
+//				Customer cust = new Customer(id, firstName, lastName, email, password);
+//				customers.add(cust);
+//			}
+//			
+//			if(customers != null)
+//			{
+//				for(Customer c: customers) {
+//					logger.info(c.toString());
+//				}
+//			} else
+//				logger.info("No customers to print");
+//			
+//			return true;
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			logger.info(e);
+//			e.printStackTrace();
+//			return false;
+//		}
+		
+		return true;
 	}
 
 	@Override
