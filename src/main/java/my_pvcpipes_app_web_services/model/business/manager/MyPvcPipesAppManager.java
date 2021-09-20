@@ -11,7 +11,9 @@ import org.apache.logging.log4j.Logger;
 import my_pvcpipes_app_web_services.model.business.exception.ServiceLoadException;
 import my_pvcpipes_app_web_services.model.domain.Composite;
 import my_pvcpipes_app_web_services.model.domain.Customer;
+import my_pvcpipes_app_web_services.model.services.authenticationservice.IAuthenticationSvc;
 import my_pvcpipes_app_web_services.model.services.customerservice.ICustomerService;
+import my_pvcpipes_app_web_services.model.services.exception.AuthenticationException;
 import my_pvcpipes_app_web_services.model.services.exception.CustomerException;
 import my_pvcpipes_app_web_services.model.services.factory.ServiceFactory;
 
@@ -61,6 +63,36 @@ public class MyPvcPipesAppManager extends ManagerSuperType{
 		}
 		
 		return customersList;
+	}
+	
+	public Customer performActionReturnCustomer(String commandString, String email, String password) {
+		Customer customer = null;
+		
+		if(commandString.equals("ReturnCustomer")) {
+			customer = returnCustomer(IAuthenticationSvc.NAME, email, password);
+		}
+		
+		return customer;
+	}
+	
+	public Customer returnCustomer(String commandString, String email, String password) {
+		Customer customer = null;
+		
+		ServiceFactory serviceFactory = ServiceFactory.getInstance();
+		IAuthenticationSvc iAuthenticationSvc;
+		
+		try {
+			iAuthenticationSvc = (IAuthenticationSvc) serviceFactory.getService(commandString);
+			customer = iAuthenticationSvc.checkLogin(email, password);
+		}  catch (ServiceLoadException e1) {
+			logger.info("MyPvcPipesAppManager::returnCustomer failed");
+		} catch (AuthenticationException  e) {
+			// TODO Auto-generated catch block
+			logger.info("MyPvcPipesAppManager::returnCustomer failed");
+			e.printStackTrace();
+		}
+		
+		return customer;
 	}
 	
 	public List<Customer> returnAllCustomersList(String commandString) {
@@ -172,11 +204,8 @@ public class MyPvcPipesAppManager extends ManagerSuperType{
 		ICustomerService iCustomerService;
 		
 		try {
-			logger.info("MyPvcPipesAppManager::listCustomers failed :: 175");
 			iCustomerService = (ICustomerService) serviceFactory.getService(commandString);
-			logger.info("MyPvcPipesAppManager::listCustomers failed :: 177");
 			isSuccess = iCustomerService.getAllCustomers();
-			logger.info("MyPvcPipesAppManager::listCustomers failed :: 179");
 		}  catch (ServiceLoadException e1) {
 			logger.info("MyPvcPipesAppManager::listCustomers failed :: ServiceLoadException");
 		} catch (CustomerException e) {
