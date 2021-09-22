@@ -18,10 +18,14 @@
 </servlet>
 
 <servlet>
+	<servlet-name>logout</servlet-name>
+	<servlet-class>my_pvcpipes_app_web_services.controllers.CustomerLogoutController</servlet-class>
+</servlet>
+
+<servlet>
 	<servlet-name>customerRegistration</servlet-name>
 	<servlet-class>my_pvcpipes_app_web_services.controllers.CustomerController</servlet-class>
 </servlet>
-
 
 <servlet-mapping>
    <servlet-name>welcomePage</servlet-name>
@@ -34,9 +38,16 @@
 </servlet-mapping>
 
 <servlet-mapping>
+	<servlet-name>logout</servlet-name>
+	<url-pattern>/logout</url-pattern>
+</servlet-mapping>
+
+<servlet-mapping>
 	<servlet-name>customerRegistration</servlet-name>
 	<url-pattern>/customerRegistration</url-pattern>
 </servlet-mapping>
+
+
 
   <resource-ref>
       <description>DB Connection</description>

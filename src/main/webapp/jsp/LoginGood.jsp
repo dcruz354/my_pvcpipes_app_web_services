@@ -9,6 +9,12 @@
 <body>
 	<h1>Login Accepted! </h1>
 	<br>
-	<b>Welcome, ${customer.firstName}</b>				
+	<b>Welcome, ${customer.firstName}</b>
+	<br><br>
+	
+	<form method="POST" action="logout">
+		<h1></h1>
+		<input type = "submit" value = "Logout"/>
+	</form>			
 </body>
 </html>
